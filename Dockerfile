@@ -1,17 +1,23 @@
 # Используем базовый образ Python
 FROM python:3.9-slim
 
+# Перепроверка установлен ли pip
+RUN apt-get update && apt-get install -y python3-pip
+
 # Установка зависимостей и SQLite
 RUN apt-get update && apt-get install -y sqlite3 supervisor && rm -rf /var/lib/apt/lists/*
 
 # Создаем рабочую директорию
 WORKDIR /app
 
-# Копируем все файлы приложения
-COPY app /app
+# Копируем файлы с зависимостями
+COPY app/requirements.txt /app/
 
 # Устанавливаем зависимости Python
-RUN pip install --no-cache-dir -r /app/requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Копируем весь код приложения
+COPY app /app
 
 # Создаем директорию для базы данных
 RUN mkdir -p /app/data
