@@ -36,7 +36,7 @@ my_project/
 
 ### 1. Клонирование репозитория
 ```bash
-git clone <URL_РЕПОЗИТОРИЯ>
+git clone https://github.com/SanchrTV/my_project
 cd my_project
 ```
 
